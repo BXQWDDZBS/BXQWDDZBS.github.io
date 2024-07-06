@@ -8,7 +8,7 @@
     <link href="/2024/07/05/testpaper/"/>
     <url>/2024/07/05/testpaper/</url>
     
-    <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="/images/test.jpg"></p>]]></content>
+    <content type="html"><![CDATA[<p>这是一篇测试文章<br>第二次测试</p><p><img src="/images/test.jpg"></p>]]></content>
     
     
     <categories>
