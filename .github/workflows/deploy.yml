@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+ 	 with:
+	    submodules: 'recursive'
       
       # 【修正一】安装 Go 语言环境（此处正确，保留不动）
       - uses: actions/setup-go@v5
