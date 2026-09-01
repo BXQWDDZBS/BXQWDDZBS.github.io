@@ -1,53 +1,47 @@
 # 1. 给这个自动化流程起个名字（随便起，叫“打包博客”也行）
 name: Deploy Hugo site to Pages
 
-# 2. 触发条件：只要我把代码 push（推送）到 main 分支，这个流程就会自动执行
+# 2. 触发条件：只要我把代码 push 到 main 分支，这个流程就会自动执行
 on:
   push:
     branches: ["main"]
-  # 允许手动在网页上点按钮运行（方便调试）
   workflow_dispatch:
 
-# 3. 具体要执行的任务（分为“打包”和“部署”两步）
+# 3. 具体要执行的任务
 jobs:
-  # 第一个任务：打包
   build:
-    # 借用 GitHub 官方的电脑来跑代码（免费）
     runs-on: ubuntu-latest
     steps:
-      # 步骤 A：把你在本地的代码复制到这台虚拟电脑上
       - uses: actions/checkout@v4
       
-      # 步骤 B：安装 Go 语言环境（因为 Hugo 是 Go 写的）
+      # 【修正一】安装 Go 语言环境（此处正确，保留不动）
       - uses: actions/setup-go@v5
         with:
           go-version: '1.22'
       
-      # 步骤 C：安装 Hugo（就是你本地装的那个工具）
-      - uses: actions/hugo@v3
+      # 【修正二】**这里是大坑**：原错误写法是 actions/hugo@v3
+      # 必须改成社区维护的 peaceiris/actions-hugo@v3
+      - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.165.0'
           extended: true
       
-      # 步骤 D：执行编译命令，把 md 文件变成 public 文件夹里的 html 文件
+      # 执行编译命令
       - run: hugo --minify
       
-      # 步骤 E：把生成的 public 文件夹打包上传到 GitHub 的临时仓库
+      # 把生成的 public 文件夹打包上传
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
-  # 第二个任务：部署（把打好的包放到外网去）
   deploy:
     runs-on: ubuntu-latest
-    # 必须等上面那个任务跑完了，才能执行这个
     needs: build
-    # 给部署权限
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
     steps:
-      # 把刚才上传的打包文件，直接扔到网页服务器上
+      # 【修正三】部署也是用官方标准写法，此处正确
       - uses: actions/deploy-pages@v4
