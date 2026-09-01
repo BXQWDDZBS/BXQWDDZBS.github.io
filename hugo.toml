@@ -1,4 +1,75 @@
-baseURL = 'https://example.org/'
-locale = 'en-us'
-title = 'My New Hugo Project'
+# ==============================================
+# 站点基本设置
+# ==============================================
+title = "BXQWDDZBS 的研究生笔记"
+baseURL = "https://bxqwddzbs.github.io/"
+languageCode = "zh-cn"
+enableEmoji = true
 theme = "PaperMod"
+
+# ==============================================
+# 菜单栏（顶部导航）
+# ==============================================
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "📝 全部文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "papers"
+    name = "📄 论文笔记"
+    url = "/tags/论文笔记/"
+    weight = 20
+  [[menu.main]]
+    identifier = "leetcode"
+    name = "💻 刷题记录"
+    url = "/tags/刷题记录/"
+    weight = 30
+  [[menu.main]]
+    identifier = "about"
+    name = "👤 关于我"
+    url = "/about/"
+    weight = 40
+
+# ==============================================
+# 页面核心参数
+# ==============================================
+[params]
+  title = "BXQWDDZBS 的研究生笔记"
+  description = "分布式系统 / 论文阅读 / 算法刷题"
+  author = "BXQWDDZBS"
+  DateFormat = "2006年01月02日"
+  
+  # 显示/隐藏组件
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowAuthor = true
+  ShowToc = true
+  TocOpen = false
+  ShowScrollToTop = true
+
+# 【修正关键点1】主页简介（改用 [params.homeInfoParams] 子表）
+[params.homeInfoParams]
+  Title = "👋 你好，我是 BXQWDDZBS"
+  Content = "欢迎来到我的研究生笔记博客。这里会记录分布式系统论文阅读、LeetCode 刷题和 Go 语言学习心得。"
+
+# 【修正关键点2】社交链接（改用 [[params.socialIcons]] 数组表）
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/BXQWDDZBS"
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:你的邮箱@example.com"
+
+# ==============================================
+# 代码高亮设置
+# ==============================================
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNumbers = true
